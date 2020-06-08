@@ -12,7 +12,7 @@ import java.lang.reflect.Constructor;
 
 public class FoodSelector extends JPanel {
 
-    private Food food;
+    private Food food = null;
 
     private JLabel dishLabel;
     private JTextField dishField;
@@ -59,7 +59,10 @@ public class FoodSelector extends JPanel {
             Class clazz = Class.forName("app.model." + dishName);
             Constructor constructor = clazz.getConstructor();
             food = (Dish)constructor.newInstance();
-        } catch(Exception e) {}
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(App.getMainFrame(), "Dish not existent. \nPlease choose a dish from the set {pizza, burger}.",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void toppingButtonClick(ActionEvent actionEvent) {
@@ -68,11 +71,17 @@ public class FoodSelector extends JPanel {
         toppingName = StringUtils.joinCapitalizedStrings(toppingName.split(" "));
 //        System.out.println(toppingName);
         try {
-            Class clazz = Class.forName("app.model.topping." + toppingName);
-            Constructor constructor = clazz.getConstructor(Food.class);
-            food = (Food)constructor.newInstance(food);
-        } catch(Exception e) {
-            e.printStackTrace();
+            if(food == null) {
+                JOptionPane.showMessageDialog(App.getMainFrame(), "Please set dish before adding any toppings.",
+                                              "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Class clazz = Class.forName("app.model.topping." + toppingName);
+                Constructor constructor = clazz.getConstructor(Food.class);
+                food = (Food)constructor.newInstance(food);
+            }
+        } catch(NoClassDefFoundError | Exception e) {
+            JOptionPane.showMessageDialog(App.getMainFrame(), "Topping not existent. \nPlease choose a known topping.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

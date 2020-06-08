@@ -10,6 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.net.URL;
 import java.rmi.Naming;
 
@@ -21,6 +22,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         dishService = (DishService)Naming.lookup("rmi://localhost:12345/foodservice");
         mainFrame = new MainFrame();
+
 //        mainFrame.getImagePanel().setImage(ImageIO.read(new URL("https://images.unsplash.com/photo-1525426996102-52becb48ee14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE0MDI2NX0")));
 //        Food food = new Ham(new Cheese(new Mushroom(new Pepperoni(new Pizza()))));
 //        System.out.println(dishService.addDish(food));

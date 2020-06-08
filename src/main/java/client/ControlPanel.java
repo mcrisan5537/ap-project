@@ -46,7 +46,7 @@ public class ControlPanel extends JPanel {
             reader.transferTo(new BufferedOutputStream(new FileOutputStream("image " + Math.random()*943559473 + ".jpeg")));
             reader.close();
         } catch(Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(App.getMainFrame(), "Failed saving image.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -57,10 +57,14 @@ public class ControlPanel extends JPanel {
             if(root.getAsJsonPrimitive("success").getAsBoolean()) {
                 imageURL = root.getAsJsonObject("imageLinks").getAsJsonPrimitive("full").getAsString();
                 App.getMainFrame().getImagePanel().setImage(ImageIO.read(new URL(imageURL)));
+            } else {
+                String message = root.getAsJsonPrimitive("message").getAsString();
+                String error = root.getAsJsonPrimitive("error").getAsString();
+                JOptionPane.showMessageDialog(App.getMainFrame(), "Failed adding dish.\n" + message, error, JOptionPane.ERROR_MESSAGE);
             }
         } catch(Exception e) {
 //            e.printStackTrace();
-            System.err.println("Failed adding dish.");
+            JOptionPane.showMessageDialog(App.getMainFrame(), "Failed adding dish.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
