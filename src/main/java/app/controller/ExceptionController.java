@@ -24,10 +24,10 @@ public class ExceptionController {
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @ExceptionHandler({Exception.class})
-//    public ResponseEntity<Error> handleGenericError(Exception e) {
-//        Error error = new Error("Unknown error.", e.getMessage());
-//        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<Error> handleGenericError(Exception e) {
+        Error error = new Error("Unknown error.", e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

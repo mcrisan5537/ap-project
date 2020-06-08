@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import util.StringUtils;
 
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -40,6 +41,7 @@ public class DishServiceImplementation extends UnicastRemoteObject implements Di
         httpConnection.connect();
 
         String json = parseDish(food);
+//        System.out.println(json);
         PrintWriter writer = new PrintWriter(httpConnection.getOutputStream());
         writer.println(json);
         writer.close();
@@ -67,7 +69,8 @@ public class DishServiceImplementation extends UnicastRemoteObject implements Di
         Topping topping = (Topping) food;
         try {
             while(true) {
-                toppings.add(topping.getClass().getSimpleName());
+                String toppingName = topping.getClass().getSimpleName();
+                toppings.add(StringUtils.separateByUppercase(toppingName));
                 topping = (Topping)topping.getFood();
             }
         } catch(ClassCastException e) {}

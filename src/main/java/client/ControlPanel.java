@@ -59,6 +59,7 @@ public class ControlPanel extends JPanel {
                 App.getMainFrame().getImagePanel().setImage(ImageIO.read(new URL(imageURL)));
             }
         } catch(Exception e) {
+//            e.printStackTrace();
             System.err.println("Failed adding dish.");
         }
     }

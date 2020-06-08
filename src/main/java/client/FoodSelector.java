@@ -64,13 +64,16 @@ public class FoodSelector extends JPanel {
 
     private void toppingButtonClick(ActionEvent actionEvent) {
         String toppingName = toppingField.getText();
+//        System.out.println(toppingName);
         toppingName = StringUtils.joinCapitalizedStrings(toppingName.split(" "));
+//        System.out.println(toppingName);
         try {
             Class clazz = Class.forName("app.model.topping." + toppingName);
             Constructor constructor = clazz.getConstructor(Food.class);
             food = (Food)constructor.newInstance(food);
-        } catch(Exception e) {}
-//        System.out.println(App.parseDish(food));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Food getFood() {

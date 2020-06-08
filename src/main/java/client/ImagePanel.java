@@ -20,7 +20,7 @@ public class ImagePanel extends JPanel {
     }
 
     public void setImage(BufferedImage image) {
-        this.image = image.getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+        this.image = image.getScaledInstance(1280, 720, Image.SCALE_FAST);
         this.paintComponent(this.getGraphics());
     }
 

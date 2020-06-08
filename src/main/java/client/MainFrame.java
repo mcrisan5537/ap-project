@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
         add(controlPanel, BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
